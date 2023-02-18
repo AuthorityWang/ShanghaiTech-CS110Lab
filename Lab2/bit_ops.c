@@ -9,6 +9,7 @@ get_bit (unsigned x, unsigned n)
        Returning -1 is a placeholder (it makes
        no sense, because get_bit only returns 
        0 or 1) */
+    return (x & (1 << n)) >> n;
     return -1;
 }
 
@@ -18,6 +19,12 @@ void
 set_bit (unsigned *x, unsigned n, unsigned v)
 {
     /* YOUR CODE HERE */
+    if (v == 1) {
+        *x = *x | (1 << n);
+    }
+    else {
+        *x = *x & ~(1 << n);
+    }
 }
 
 /* Flip the nth bit of the value of x.
@@ -26,6 +33,7 @@ void
 flip_bit (unsigned *x, unsigned n)
 {
     /* YOUR CODE HERE */
+    *x = *x ^ (1 << n);
 }
 
 

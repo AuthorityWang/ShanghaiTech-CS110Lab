@@ -1,3 +1,7 @@
 # bad_vector_new()
 
-Line 25: a local var
+Line 25: a local var. 
+
+# also_bad_vector_new()
+
+Line 50: return a local var, not a ptr.

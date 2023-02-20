@@ -19,6 +19,8 @@ hello
 
 #### 4. If the next line of code is a function call, you'll execute the whole function call at once if you use your answer to #3. (If not, consider a different command for #3!) How do you tell GDB that you want to debug the code inside the function instead? (If you changed your answer to #3, then that answer is most likely now applicable here.)
 
+```s```
+
 #### 5. How do you resume the program after stopping at a breakpoint?
 
 ```c for continue```

@@ -16,12 +16,8 @@ unsigned get_bit (unsigned x, unsigned n)
 void set_bit (unsigned *x, unsigned n, unsigned v)
 {
     /* YOUR CODE HERE */
-    if (v == 1) {
-        *x = *x | (1 << n);
-    }
-    else {
-        *x = *x & (~(1 << n));
-    }
+    *x = *x & ~(1 << n);
+    *x = *x | (v << n);
 }
 
 /* Flip the nth bit of the value of x.

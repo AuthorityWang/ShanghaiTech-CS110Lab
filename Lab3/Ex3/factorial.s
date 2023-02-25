@@ -41,5 +41,11 @@ main_exit:
 	addi a0, x0, 10
 	ecall # Exit
 
+# calculate factorial
 factorial:
-	# YOUR CODE HERE
+	addi t0, x0, 1
+	addi t1, x0, 1
+	beq t0, a0, main_loop
+	mul t1, t1, t0
+	addi t0, t0, 1
+	jal x0, factorial

@@ -14,7 +14,31 @@
 
 ### At what address is n stored in memory? Hint: Look at the contents of the registers.
 
-to be continued...
+![1](.\1.png)
+
+first  la t3, n
+
+add upper immediate to pc
+
+set t3:0x10000008
+
+
+
+![2](.\2.png)
+
+second la t3, n
+
+add 8 to t3
+
+set t3:0x10000010
+
+![3](./3.png)
+
+load word
+
+
+
+so the address of n is 0x10000010
 
 
 

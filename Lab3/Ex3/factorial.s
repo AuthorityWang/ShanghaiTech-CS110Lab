@@ -41,10 +41,19 @@ main_exit:
 	addi a0, x0, 10
 	ecall # Exit
 
+
 # calculate factorial
 factorial:
-	addi a0, a0, -1
-	beq a0, x0, L1
+	add a1, x0, a0
+	addi a2, x0, 1
+	bne a0, x0, fac_loop
+	ecall # Exit
 
-L1:
-	ret
+fac_loop:
+#	beq a2, a1, fac_exit
+	mul a0, a0, a2
+	addi a2, a2, 1
+	bne a2, a1, fac_loop
+
+# fac_exit:
+#	ecall # Exit

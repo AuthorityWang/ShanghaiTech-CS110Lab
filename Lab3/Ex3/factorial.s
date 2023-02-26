@@ -54,6 +54,9 @@ fac_loop:
 	mul a0, a0, a2
 	addi a2, a2, 1
 	bne a2, a1, fac_loop
+	ret
 
 # fac_exit:
+#	addi a0, x0, 10
+#	ecall # Exit
 #	ecall # Exit

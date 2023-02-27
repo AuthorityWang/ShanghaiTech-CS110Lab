@@ -14,7 +14,7 @@
 
 ### At what address is n stored in memory? Hint: Look at the contents of the registers.
 
-![1](.\1.png)
+![1](./1.png)
 
 first  la t3, n
 
@@ -24,7 +24,7 @@ set t3:0x10000008
 
 
 
-![2](.\2.png)
+![2](./2.png)
 
 second la t3, n
 

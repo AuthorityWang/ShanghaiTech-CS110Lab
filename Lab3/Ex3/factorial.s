@@ -47,7 +47,7 @@ factorial:
 	add a1, x0, a0
 	addi a2, x0, 1
 	bne a0, x0, fac_loop
-	ecall # Exit
+	ret # Exit
 
 fac_loop:
 #	beq a2, a1, fac_exit

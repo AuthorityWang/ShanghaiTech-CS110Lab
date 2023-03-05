@@ -9,9 +9,9 @@ data: # input, answer
 # === main and helper functions ===
 # You don't need to understand these, but reading them may be useful
 main:
-    la t0, n
-    lw s0, 0(t0)
-    la s1, data
+    la t0, n # t0 = &n
+    lw s0, 0(t0) # s0 = *t0 (s0 = 3)
+    la s1, data # s1 = data
     main_loop: # run each of the n tests
         beq s0, zero, main_loop_end
         lw a0, 0(s1)

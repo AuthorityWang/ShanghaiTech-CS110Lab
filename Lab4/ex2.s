@@ -17,7 +17,7 @@ main:
 
     # Load the address of the "square" function into a1 (hint: check out "la" on the green sheet)
     ### TODO: YOUR CODE HERE ###
-
+    la a1, square
 
     # Issue the call to map
     jal ra, map
@@ -52,7 +52,6 @@ main:
 map:
     # Prologue: Make space on the stack and back-up registers
     ### TODO: YOUR CODE HERE ###
-
     beq a0, x0, done # If we were given a null pointer (address 0), we're done.
 
     add s0, a0, x0 # Save address of this node in s0
@@ -82,7 +81,7 @@ map:
 
     # Recurse
     ### TODO: YOUR CODE HERE ###
-
+    j map
 done:
     # Epilogue: Restore register values and free space from the stack
     ### TODO: YOUR CODE HERE ###

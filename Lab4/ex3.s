@@ -51,6 +51,8 @@ print_newline:
 # Reverse the bits in a0 with a loop
 bitrev1:
     ### TODO: YOUR CODE HERE ###
+    addi sp, sp, -4
+    sw ra, 0(sp) # store register point
     addi a0, x0, 0 # a0 0
     lw a1, 0(s1) # a1 = data[i] (i=0,2,4)
     addi a3, x0, 0 # a3 : bits
@@ -61,10 +63,13 @@ bitrev1:
         andi a2, a1, 1
         add a0, a0, a2
         srli a1, a1, 1
-        j reverse_loop
+        addi a3, a3, 1
+        jal reverse_loop
 
     reverse_loop_end:
-        j print_hex_and_space # print input
+        # jal print_hex_and_space # print input
+        lw ra 0(sp)
+        addi sp, sp, 4
         ret
 
 # === The second version ===
@@ -72,4 +77,49 @@ bitrev1:
 bitrev2:
     ### TODO: YOUR CODE HERE ###
     
+    # step 1 k = 32
+    li a2, 0xFFFF0000 # 1111 1111 1111 1111 0000 0000 0000 0000
+    li a3, 0x0000FFFF # 0000 0000 0000 0000 1111 1111 1111 1111
+    and a2, a2, a0
+    and a3, a3, a0
+    srli a2, a2, 16
+    slli a3, a3, 16
+    or a0, a2, a3
+
+    # step 2 k = 16
+    li a2, 0xFF00FF00 # 1111 1111 0000 0000 1111 1111 0000 0000
+    li a3, 0x00FF00FF # 0000 0000 1111 1111 0000 0000 1111 1111
+    and a2, a2, a0
+    and a3, a3, a0
+    srli a2, a2, 8
+    slli a3, a3, 8
+    or a0, a2, a3
+
+    # step 3 k = 8
+    li a2, 0xF0F0F0F0 # 1111 0000 1111 0000 1111 0000 1111 0000
+    li a3, 0x0F0F0F0F # 0000 1111 0000 1111 0000 1111 0000 1111
+    and a2, a2, a0
+    and a3, a3, a0
+    srli a2, a2, 4
+    slli a3, a3, 4
+    or a0, a2, a3
+
+    # step 4 k = 4
+    li a2, 0xCCCCCCC # 1100 1100 1100 1100 1100 1100 1100 1100
+    li a3, 0x3333333 # 0011 0011 0011 0011 0011 0011 0011 0011
+    and a2, a2, a0
+    and a3, a3, a0
+    srli a2, a2, 2
+    slli a3, a3, 2
+    or a0, a2, a3
+
+    # step 5 k = 2
+    li a2, 0xAAAAAAA # 1010 1010 1010 1010 1010 1010 1010 1010
+    li a3, 0x5555555 # 0101 0101 0101 0101 0101 0101 0101 0101
+    and a2, a2, a0
+    and a3, a3, a0
+    srli a2, a2, 1
+    slli a3, a3, 1
+    or a0, a2, a3
+
     ret

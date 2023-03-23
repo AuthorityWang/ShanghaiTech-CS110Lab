@@ -21,7 +21,7 @@ dest:
 
 .text
 main:
-	addi t0, x0, 0
+	addi t0, x0, 0 
 	la t1, source
 	la t2, dest
 loop:

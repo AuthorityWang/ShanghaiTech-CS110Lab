@@ -53,6 +53,7 @@ bitrev1:
     ### TODO: YOUR CODE HERE ###
     addi sp, sp, -4
     sw ra, 0(sp) # store register point
+    
     addi a0, x0, 0 # a0 0
     lw a1, 0(s1) # a1 = data[i] (i=0,2,4)
     addi a3, x0, 0 # a3 : bits
@@ -68,7 +69,7 @@ bitrev1:
 
     reverse_loop_end:
         # jal print_hex_and_space # print input
-        lw ra 0(sp)
+        lw ra, 0(sp)
         addi sp, sp, 4
         ret
 

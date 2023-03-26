@@ -226,7 +226,8 @@ end TCL_Generic;
     </comp>
     <comp lib="4" loc="(430,330)" name="ROM">
       <a name="contents">addr/data: 8 8
-1 80 81 ff f0 f
+1 80 81 ff f0 ef fd ed
+87 96 57 aa d 2f
 </a>
     </comp>
     <comp lib="0" loc="(710,440)" name="Pin">

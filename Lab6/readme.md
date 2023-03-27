@@ -14,3 +14,5 @@ Since Logisim will be running in one terminal window already, make sure to open 
 '''
 chmod +x test.sh
 '''
+
+?

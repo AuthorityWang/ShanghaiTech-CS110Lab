@@ -20,8 +20,7 @@ $(T_{clk})_{min} = 280ns​$
 $(f_{clk})_{max} = 3.571 MHz​$
 
 ##### pipelined
-$t_{cd} = 2 * t_{adder} = 45 * 2 = 90ns$
 $T_{clk} \geq setup + t_{cd} + t_{pcq}$
-$T_{clk} \geq 10 + 90 + 10 = 180ns$
-$(T_{clk})_{min} = 110ns$
-$(f_{clk})_{max} = 9.091 MHz​$
+$T_{clk} \geq 10 + 65 + 10 = 85ns$
+$(T_{clk})_{min} = 85ns$
+$(f_{clk})_{max} = 11.765 MHz​$

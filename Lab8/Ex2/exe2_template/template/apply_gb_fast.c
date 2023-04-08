@@ -15,10 +15,13 @@ Image transpose(Image a){
     return b;
 }
 
+// use the function transpose() to implement the vertical gaussian blur in a fast way
 Image apply_gb(Image a, FVec gv)
 {
     Image b = gb_h(a, gv);
-    Image c = gb_v(b,gv);
+    Image c = transpose(b);
+    c = gb_h(c, gv);
+    c = transpose(c);
     free(b.data);
     return c;
 }

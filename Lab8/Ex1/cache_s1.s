@@ -20,11 +20,11 @@
 # You MAY change the code below this section
 main:   
     li a0, 9        # allocate memory space for array
-    li a1, 128     # array size is 128
+    li a1, 2048     # array size is 128
     ecall
     mv a4, a0
 
-    li a0, 16     # array size in BYTES (power of 2 < array size)
+    li a0, 128     # array size in BYTES (power of 2 < array size)
     li a1, 8       # step size  (power of 2 > 0)
     li a2, 4       # rep count  (int > 0)
     li a3, 0       # 0 - option 0, 1 - option 1

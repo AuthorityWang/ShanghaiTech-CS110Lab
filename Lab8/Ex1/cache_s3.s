@@ -25,9 +25,9 @@ main:
     mv a4, a0
 
     li a0, 256     # array size in BYTES (power of 2 < array size)
-    li a1, 2       # step size  (power of 2 > 0)
-    li a2, 1       # rep count  (int > 0)
-    li a3, 1       # 0 - option 0, 1 - option 1
+    li a1, 8       # step size  (power of 2 > 0)
+    li a2, 2       # rep count  (int > 0)
+    li a3, 0       # 0 - option 0, 1 - option 1
 # You MAY change the code above this section
 ##################################################################################################
 

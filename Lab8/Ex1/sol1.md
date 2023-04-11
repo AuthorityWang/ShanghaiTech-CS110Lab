@@ -9,7 +9,7 @@ Hit rate = 0, no matter how the rep count is. As
 
 #### 3.How could we modify our program parameters to maximize our hit rate?
 
-By setting the step size to 1, we can maximize the hit rate.
+By setting the step size to 1... or even bigger, we can maximize the hit rate to 0.75.
 
 # Scenario 2:
 
@@ -51,7 +51,7 @@ We can set the BLOCK to be a proper value with the cache size, so that the data 
 
 #### 1. Run the simulation a few times. Every time, set a different seed value (bottom of the cache window). Note that the hit rate is non-deterministic. What is the range of its hit rate? Why is this the case? ("The cache eviction is random" is not a sufficient answer)
 
-0.1875, 0.125, 0.25, 0.3125, 0.375
+0.0625,0.1875, 0.125, 0.25, 0.3125, 0.375
 
 #### 2. Which Cache parameter can you modify in order to get a constant hit rate? Record the parameter and its value (and be prepared to show your TA a few runs of the simulation). How does this parameter allow us to get a constant hit rate? And explain why the constant hit rate value is that value.
 

@@ -71,16 +71,19 @@ void loop_unroll_matmul(void) {
 
     // c2 = a * b
     // TODO: implement me!
-    float **transform;
-    transform = malloc(n * sizeof(float *));
-    for (int i = 0; i < n; ++i) 
-        transform[i] = malloc(4 * sizeof(float));
 
-
-
+    // -------------------------------------------
+    // to delete
     for (int i = 0; i < n; ++i) {
-        free(transform[i]);
-    transform = malloc(n * sizeof(float *));
+        for (int j = 0; j < p; ++j) {
+            c2[i][j] = 0;
+            for (int k = 0; k < 4; ++k) {
+                c2[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    // -------------------------------------------
+
 
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("unroll: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);
@@ -92,6 +95,28 @@ void simd_matmul(void) {
     clock_gettime(CLOCK_MONOTONIC, &start);
     // c2 = a * b
     // TODO: implement me!
+    float **transform;
+    transform = malloc(p * sizeof(float *));
+    for (int i = 0; i < p; ++i) 
+        transform[i] = malloc(4 * sizeof(float));
+    for(int i = 0; i < p; ++i)
+        for(int j = 0; j < 4; ++j)
+            transform[i][j] = b[j][i];
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < p; ++j)
+        {
+            __m128 A = _mm_loadu_ps(a[i]);
+            __m128 B = _mm_loadu_ps(transform[j]);
+            __m128 C = _mm_mul_ps(A, B);
+            c2[i][j] = C[0] + C[1] + C[2] + C[3];
+        }
+    }
+
+    for (int i = 0; i < p; ++i)
+        free(transform[i]);
+    free(transform);
+
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("simd: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);
     check_correctness("simd_matmul");
@@ -102,6 +127,19 @@ void loop_unroll_simd_matmul(void) {
     clock_gettime(CLOCK_MONOTONIC, &start);
     // c2 = a * b
     // TODO: implement me!
+
+     // -------------------------------------------
+    // to delete
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < p; ++j) {
+            c2[i][j] = 0;
+            for (int k = 0; k < 4; ++k) {
+                c2[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    // -------------------------------------------
+
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("unroll+simd: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);
     check_correctness("loop_unroll_simd_matmul");

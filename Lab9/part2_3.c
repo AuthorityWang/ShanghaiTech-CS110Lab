@@ -71,6 +71,17 @@ void loop_unroll_matmul(void) {
 
     // c2 = a * b
     // TODO: implement me!
+    float **transform;
+    transform = malloc(n * sizeof(float *));
+    for (int i = 0; i < n; ++i) 
+        transform[i] = malloc(4 * sizeof(float));
+
+
+
+    for (int i = 0; i < n; ++i) {
+        free(transform[i]);
+    transform = malloc(n * sizeof(float *));
+
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("unroll: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);
     check_correctness("loop_unroll_matmul");

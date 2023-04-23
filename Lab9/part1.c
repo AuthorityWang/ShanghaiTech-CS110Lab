@@ -15,6 +15,16 @@ void naive_add(void) {
 
 void simd_add(void) {
     // TODO: implement me!
+    for (int i = 0; i < 1000; ++i)
+    {
+        for (int j = 0; j < 40; j += 4)
+        {
+            __m128i A = _mm_loadu_si128((__m128i*)&a[i][j]);
+            __m128i B = _mm_loadu_si128((__m128i*)&b[i][j]);
+            __m128i C = _mm_add_epi32(A, B);
+            _mm_storeu_si128((__m128i*)&c[i][j], C);   
+        }
+    }
 }
 
 int main(void) {

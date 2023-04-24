@@ -8,6 +8,8 @@ float **b;
 float **c;
 float **c2;
 
+float **transform;
+
 int n = 40000;
 int p = 20000;
 
@@ -16,6 +18,11 @@ void init(void) {
     b = malloc(4 * sizeof(float *));
     c = malloc(n * sizeof(float *));
     c2 = malloc(n * sizeof(float *));
+    transform = malloc(p * sizeof(float *));
+    
+    for (int i = 0; i < p; ++i) 
+        transform[i] = malloc(4 * sizeof(float));
+    
     for (int i = 0; i < n; ++i) {
         a[i] = malloc(4 * sizeof(float));
         c[i] = malloc(p * sizeof(float));
@@ -36,6 +43,10 @@ void init(void) {
             b[i][j] = (float) rand() / (float) RAND_MAX;
         }
     }
+
+    for(int i = 0; i < p; ++i)
+        for(int j = 0; j < 4; ++j)
+            transform[i][j] = b[j][i];
 }
 #define eps 1e-6
 void check_correctness(char *msg) {
@@ -92,13 +103,6 @@ void simd_matmul(void) {
     clock_gettime(CLOCK_MONOTONIC, &start);
     // c2 = a * b
     // TODO: implement me!
-    float **transform;
-    transform = malloc(p * sizeof(float *));
-    for (int i = 0; i < p; ++i) 
-        transform[i] = malloc(4 * sizeof(float));
-    for(int i = 0; i < p; ++i)
-        for(int j = 0; j < 4; ++j)
-            transform[i][j] = b[j][i];
 
     for (int i = 0; i < n; ++i)
     {
@@ -111,10 +115,6 @@ void simd_matmul(void) {
         }
     }
 
-    for (int i = 0; i < p; ++i)
-        free(transform[i]);
-    free(transform);
-
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("simd: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);
     check_correctness("simd_matmul");
@@ -125,14 +125,7 @@ void loop_unroll_simd_matmul(void) {
     clock_gettime(CLOCK_MONOTONIC, &start);
     // c2 = a * b
     // TODO: implement me!
-
-    float **transform;
-    transform = malloc(p * sizeof(float *));
-    for (int i = 0; i < p; ++i) 
-        transform[i] = malloc(4 * sizeof(float));
-    for(int i = 0; i < p; ++i)
-        for(int j = 0; j < 4; ++j)
-            transform[i][j] = b[j][i];
+    
     for (int i = 0; i < n; ++i)
     {
         __m128 A = _mm_loadu_ps(a[i]);
@@ -155,10 +148,6 @@ void loop_unroll_simd_matmul(void) {
             c2[i][j + 3] = C3[0] + C3[1] + C3[2] + C3[3];
         }
     }
-
-    for (int i = 0; i < p; ++i)
-        free(transform[i]);
-    free(transform);
 
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("unroll+simd: %f\n", (float) (end.tv_sec - start.tv_sec) + (float) (end.tv_nsec - start.tv_nsec) / 1000000000.0f);

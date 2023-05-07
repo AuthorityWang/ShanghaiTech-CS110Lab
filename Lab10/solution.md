@@ -23,3 +23,5 @@ Bonus: Implement an additional optimization and discuss its impact on performanc
 
 
 ## Exercise 3 - Dot Product
+    gcc -fopenmp -Wall -Wextra -std=gnu99 dotp.c -o dotp
+    ./dotp

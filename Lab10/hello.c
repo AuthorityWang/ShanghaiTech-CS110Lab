@@ -3,9 +3,14 @@
 
 int main ()
 {
-  #pragma omp parallel
+  // default: num_threads = 8
+  // int num_threads = 9465; //9466 error？
+  int num_threads = 8;
+  omp_set_num_threads(num_threads);
+  int thread_ID = 0;
+  #pragma omp parallel private(thread_ID)
   {
-    int thread_ID = omp_get_thread_num ();
+    thread_ID = omp_get_thread_num ();
     printf (" hello world %d\n", thread_ID);
   }
   return 0;

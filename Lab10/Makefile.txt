@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=gnu99 -fopenmp
-EXECUTABLES = hello v_add dotp
+CFLAGS = -fopenmp -Wall -Wextra -std=gnu99
+EXECUTABLES = hello matmul dotp
 
 all: $(EXECUTABLES)
 

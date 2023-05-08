@@ -17,14 +17,10 @@ void matmul_naive (double *a, double *b, double *c)
 
 void matmul_optimized_slices (double *a, double *b, double *c)
 {
-  int num_threads = 1;
-  int thread_ID = 0;
-  #pragma omp parallel private(thread_ID), shared(num_threads)
+  #pragma omp parallel
   {
-    num_threads = omp_get_num_threads();
-    // printf("num_threads = %d\n", num_threads);
-    thread_ID = omp_get_thread_num();
-    for (int i = thread_ID; i < MATRIX_SIZE; i += num_threads)
+    int num_threads = omp_get_num_threads();
+    for (int i = 0; i < MATRIX_SIZE; i += num_threads)
     {
       for (int j = 0; j < MATRIX_SIZE; j++)
       {
@@ -95,6 +91,36 @@ void matmul_optimized_chunks (double *a, double *b, double *c)
   }
 
 }
+
+// void matmul_optimized_chunks (double *a, double *b, double *c)
+// {
+//   #pragma omp parallel
+//   {
+//     int total_threads = omp_get_num_threads();
+//     int curr_thread = omp_get_thread_num();
+
+//     int chunk_size = MATRIX_SIZE / total_threads;
+//     int rest_num = MATRIX_SIZE - chunk_size * total_threads;
+//     for (int i = curr_thread*chunk_size; i < ((curr_thread+1)*chunk_size); i++) {
+//       for (int j = 0; j < MATRIX_SIZE; j++) {
+//         for (int k = 0; k < MATRIX_SIZE; k++) {
+//           c[i * MATRIX_SIZE + j] += a[i * MATRIX_SIZE + k] * b[k * MATRIX_SIZE + j];
+//         }
+//       }
+//     }
+
+
+//     if(rest_num != 0) {
+// 			for (int i = MATRIX_SIZE-rest_num; i < MATRIX_SIZE; i++) {
+//         for (int j = 0; j < MATRIX_SIZE; j++) {
+//           for (int k = 0; k < MATRIX_SIZE; k++) {
+//             c[i * MATRIX_SIZE + j] += a[i * MATRIX_SIZE + k] * b[k * MATRIX_SIZE + j];
+//           }
+//         }
+//       }
+// 		}
+//   }
+// }
 
 int main()
 {

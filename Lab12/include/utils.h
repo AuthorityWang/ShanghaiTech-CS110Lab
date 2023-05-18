@@ -1,7 +1,7 @@
 #ifndef __UTILS_H
 #define __UTILS_H
 
-#define BOARD_VER /*fill in your board version here. i.e. 0 or 1*/
+#define BOARD_VER 0 /*fill in your board version here. i.e. 0 or 1*/
 
 #if BOARD_VER < 0 || BOARD_VER > 1
 #error INVALID_BOARD_VER

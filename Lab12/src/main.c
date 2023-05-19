@@ -63,6 +63,13 @@ int main(void)
     {
     delay_1ms(10);
     // YOUR CODE HERE
+
+    // row_offset, column_offset
+    LCD_ShowString(5, 5, "Hello World!", WHITE);
+    LCD_ShowString(5, 15, "Hello World!", BLUE);
+    LCD_ShowString(5, 25, "Hello World!", RED);
+    LCD_ShowString(5, 35, "Hello World!", YELLOW);
+
     }
     #endif
 }

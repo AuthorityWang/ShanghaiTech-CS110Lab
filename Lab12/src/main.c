@@ -65,10 +65,10 @@ int main(void)
     // YOUR CODE HERE
 
     // row_offset, column_offset
-    LCD_ShowString(5, 5, "Hello World!", WHITE);
-    LCD_ShowString(5, 15, "Hello World!", BLUE);
-    LCD_ShowString(5, 25, "Hello World!", RED);
-    LCD_ShowString(5, 35, "Hello World!", YELLOW);
+    LCD_ShowString(5, 0, "Hello World!", WHITE);
+    LCD_ShowString(5, 20, "Hello World!", BLUE);
+    LCD_ShowString(5, 40, "Hello World!", RED);
+    LCD_ShowString(5, 60, "Hello World!", YELLOW);
 
     }
     #endif

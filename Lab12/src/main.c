@@ -59,8 +59,7 @@ int main(void)
     Board_self_test();
     #else
     LCD_Clear(BLACK);
-    while(1)
-    {
+
     delay_1ms(10);
     // YOUR CODE HERE
 
@@ -70,6 +69,15 @@ int main(void)
     LCD_ShowString(5, 40, "Hello World!", RED);
     LCD_ShowString(5, 60, "Hello World!", YELLOW);
 
+    while (!Get_BOOT0())
+    {
+        delay_1ms(50);
+        if (Get_BOOT0())
+            break;
     }
+    
+    LCD_Clear(BLACK);
+    draw();
+
     #endif
 }

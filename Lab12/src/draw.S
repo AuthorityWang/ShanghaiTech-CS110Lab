@@ -1,6 +1,11 @@
+.data
+	str1:	.string "wphgg"
+	str2:	.string "tql"
+
 .section .text
 .globl draw
 .type draw, @function
+
 draw:
 	# YOUR CODE HERE
 
@@ -25,21 +30,31 @@ draw:
 	jal 	LCD_DrawRectangle
 
 	# print a string
-	# LCD_ShowString(hs, 95, 32, t0, GREEN);
-	la 		t0,	hs  # a pointer to char* "EricDiao"
-	li 		a0,	75
-	li 		a1,	32
+	# LCD_ShowString(str1, 110, 20, t0, GREEN);
+	la 		t0,	str1  # a pointer to char* "wphgg"
+	li 		a0,	110
+	li 		a1,	20
 	mv 		a2,	t0
 	li 		a3,	0x07E0
 	jal 	LCD_ShowString
 
+	# print a string
+	# LCD_ShowString(str2, 110, 40, t0, GREEN);
+	la 		t0,	str2  # a pointer to char* "tql"
+	li 		a0,	110
+	li 		a1,	40
+	mv 		a2,	t0
+	li 		a3,	0x07E0
+	jal 	LCD_ShowString
+
+
 	# print a num
-	# LCD_ShowNum(95, 48, 100, 3, RED);
-	li		a0,	95
-	li 		a1,	48
+	# LCD_ShowNum(110, 60, 100, 3, YELLOW);
+	li		a0,	110
+	li 		a1,	60
 	li 		a2,	100
 	li 		a3,	3
-	li 		a4, 0xF800
+	li 		a4, 0xFFE0
 	jal 	LCD_ShowNum
 
 	lw 		ra,	0(sp)

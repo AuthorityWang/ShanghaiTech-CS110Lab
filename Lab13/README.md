@@ -1,6 +1,6 @@
 # Lab 13
 
-This repository contains the starter file for Lab 12.
+This repository contains the starter file for Lab 13.
 
 ## Environment Setup
 

@@ -40,16 +40,16 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 You will be working with Spark (in Python!), so you may need to brush up a bit on your Python! To be able to run Spark, you must create a virtual environment using the correct version of Python. This can be done as such:
 ```bash
-$ conda create --name lab12env python=2.7
+$ conda create --name lab13env python=2.7
 ```
 
 Respond to the prompt to install packages with “y” (with no quotes). You can (and should) ignore any warnings about conda being out of date. These will take about 30 seconds to install. Finally, run the following command to activate the virtual environment:
 
 ```bash
-$ conda activate lab12env
+$ conda activate lab13env
 ```
 
-This will put you in a virtual environment needed for this lab. **Please remember that if you exit the virtual environment and want to return to work on the lab, you must re-run** `conda activate lab12env` **first for Spark to work.**
+This will put you in a virtual environment needed for this lab. **Please remember that if you exit the virtual environment and want to return to work on the lab, you must re-run** `conda activate lab13env` **first for Spark to work.**
 
 ## Background Information
 

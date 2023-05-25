@@ -1,4 +1,8 @@
 ## Burn the borad
+
+If "./dfu-util command not found":
+chmod +x ./dfu-util
+
 In the terminal:
 
 Boot0 - reset - reset - Boot0

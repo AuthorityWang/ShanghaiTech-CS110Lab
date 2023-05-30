@@ -12,18 +12,20 @@ def flatMapFunc(document):
     """
     documentID = document[0]
     words = re.findall(r"\w+", document[1])
-    result = []
-    current_index = 0
-    for current_word in words:
-        result.append((current_word + ' ' + documentID,[current_index]))
-        current_index = current_index + 1
-    return result
+    words_list = []
+    word_index = 0
+    for word in words:
+        index_list = []
+        index_list.append(word_index)
+        words_list.append((word+ ' ' + documentID, index_list))
+        word_index += 1
+    return words_list
 
 def mapFunc(arg):
     """
     You may need to modify this code.
     """
-    return (arg, 1)
+    return (arg[0], arg[1])
 
 def reduceFunc(arg1, arg2):
     """
@@ -36,7 +38,9 @@ def createIndices(file_name, output="spark-wc-out-createIndices"):
     file = sc.sequenceFile(file_name)
 
     indices = file.flatMap(flatMapFunc) \
-                 .reduceByKey(reduceFunc).sortByKey()
+                 .map(mapFunc) \
+                 .reduceByKey(reduceFunc) \
+                 .sortByKey()
 
     indices.coalesce(1).saveAsTextFile(output)
 

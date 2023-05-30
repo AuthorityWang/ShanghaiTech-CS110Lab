@@ -17,9 +17,7 @@ def flatMapFunc(document):
 
     You will need to modify this code.
     """
-    documentID = document[0]
-    words = re.findall(r"\w+", document[1])
-    return words
+    return list(set(re.findall(r"\w+", document[1])))
 
 def mapFunc(arg):
     """
@@ -46,9 +44,9 @@ def perWordDocumentCount(file_name, output="spark-wc-out-perWordDocumentCount"):
     """
     counts = file.flatMap(flatMapFunc) \
                  .map(mapFunc) \
-                 .reduceByKey(reduceFunc).sortByKey()
+                 .reduceByKey(reduceFunc)
 
-    counts.coalesce(1).saveAsTextFile(output)
+    counts.coalesce(1).sortByKey().saveAsTextFile(output)
 
 """ Do not worry about this """
 if __name__ == "__main__":

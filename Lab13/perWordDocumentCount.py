@@ -46,7 +46,7 @@ def perWordDocumentCount(file_name, output="spark-wc-out-perWordDocumentCount"):
     """
     counts = file.flatMap(flatMapFunc) \
                  .map(mapFunc) \
-                 .reduceByKey(reduceFunc)
+                 .reduceByKey(reduceFunc).sortByKey()
 
     counts.coalesce(1).saveAsTextFile(output)
 

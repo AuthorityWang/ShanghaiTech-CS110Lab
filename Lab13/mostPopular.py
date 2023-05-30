@@ -19,6 +19,16 @@ def sumCounts(a, b):
     Note that Map/flatMap style functions take in one argument while Reduce functions take in two
 """
 
+def switch(word):
+    return (word[1],word[0])
+
+def to_zero(word):
+    """ Creates `(key, value)` pairs where the word is the key and 1 is the value """
+    if(word[0] == "an" or word[0] == "An" or word[0] == "a" or word[0] == "A" or word[0] == "the" or word[0] == "The" or word[0] == "THE"):
+        return (word[0], 0)
+    else:
+        return word
+
 def mostPopular(file_name, output="spark-wc-out-mostPopular"):
     sc = SparkContext("local[8]", "WordCount", conf=SparkConf().set("spark.hadoop.validateOutputSpecs", "false"))
     """ Reads in a sequence file FILE_NAME to be manipulated """
@@ -26,7 +36,10 @@ def mostPopular(file_name, output="spark-wc-out-mostPopular"):
 
     counts = file.flatMap(splitDocument) \
                  .map(toPairs) \
-                 .reduceByKey(sumCounts) 
+                 .reduceByKey(sumCounts) \
+                 .map(to_zero) \
+                 .map(switch) \
+                 .sortByKey(False) \
                  # TODO: add appropriate extra transformations here
 
     """ Takes the dataset stored in counts and writes everything out to OUTPUT """
